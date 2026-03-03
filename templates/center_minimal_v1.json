@@ -1,0 +1,24 @@
+{
+  "name": "center_minimal_v1",
+  "position": "center",
+  "alignment": "center",
+  "max_lines": 2,
+  "font_family": "Inter",
+  "font_size": 64,
+  "base_color": "#FFFFFF",
+  "background_color": "transparent",
+  "highlight_color": "#FF0000",
+  "highlight_style": "color",
+  "highlight": {
+    "mode": "color",
+    "transition_in_ms": 80,
+    "transition_out_ms": 80
+  },
+  "block_config": {
+    "min_words_per_block": 3,
+    "max_words_per_block": 8,
+    "max_duration_per_block": 4.0,
+    "split_on_punctuation": true,
+    "pause_threshold": 0.5
+  }
+}

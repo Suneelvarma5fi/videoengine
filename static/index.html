@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VideoEngine</title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+
+<header>
+  <h1>VideoEngine</h1>
+  <span class="badge">V1</span>
+</header>
+
+<main>
+
+  <!-- ── Upload Screen ──────────────────────────────────────────── -->
+  <section id="screen-upload" class="screen">
+    <div
+      id="drop-zone"
+      class="drop-zone"
+      role="button"
+      aria-label="Upload video"
+    >
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </svg>
+      <p><strong>Drop a video here</strong> or click to browse</p>
+      <p>.mp4 · .mov · .avi · .mkv · .webm</p>
+    </div>
+    <p id="upload-msg" class="upload-status"></p>
+    <input id="file-input" type="file" accept="video/*" style="display:none" />
+  </section>
+
+  <!-- ── Editor Screen ──────────────────────────────────────────── -->
+  <section id="screen-editor" class="screen">
+
+    <!-- Sidebar -->
+    <aside class="editor-sidebar">
+
+      <div class="form-group">
+        <label class="form-label" for="sel-template">Template</label>
+        <select id="sel-template"></select>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <div class="form-group">
+        <label class="form-label">Base Color</label>
+        <div class="color-row">
+          <input type="color"  id="pick-base-color" value="#FFFFFF" />
+          <input type="text"   id="txt-base-color"  value="#FFFFFF" maxlength="7" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Highlight Color</label>
+        <div class="color-row">
+          <input type="color"  id="pick-highlight-color" value="#FF0000" />
+          <input type="text"   id="txt-highlight-color"  value="#FF0000" maxlength="7" />
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <div class="form-group">
+        <label class="form-label" for="rng-max-words">Max words / block</label>
+        <div class="range-row">
+          <input type="range" id="rng-max-words" min="1" max="12" value="8" />
+          <span class="range-val" id="val-max-words">8</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="rng-pause">Pause threshold (×0.1s)</label>
+        <div class="range-row">
+          <input type="range" id="rng-pause" min="1" max="20" value="5" />
+          <span class="range-val" id="val-pause">5</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="rng-max-dur">Max block duration (×0.1s)</label>
+        <div class="range-row">
+          <input type="range" id="rng-max-dur" min="5" max="80" value="40" />
+          <span class="range-val" id="val-max-dur">40</span>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Main area -->
+    <div class="editor-main">
+      <div class="editor-toolbar">
+        <span id="editor-status" style="flex:1;color:var(--muted);font-size:0.85rem;"></span>
+        <button id="btn-render" class="btn btn-primary" disabled>Render Video</button>
+      </div>
+      <div id="transcript-preview" class="transcript-preview"></div>
+    </div>
+
+  </section>
+
+  <!-- ── Export Screen ──────────────────────────────────────────── -->
+  <section id="screen-export" class="screen">
+    <div class="export-card">
+      <h2 style="font-size:1.1rem;font-weight:600;">Export</h2>
+      <div class="spinner" id="export-spinner"></div>
+      <span id="export-status" class="status-badge working">Rendering…</span>
+      <button id="btn-download" class="btn btn-success" disabled>Download Video</button>
+      <button id="btn-new-upload" class="btn btn-outline">New Upload</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

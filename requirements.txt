@@ -1,0 +1,10 @@
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+python-multipart>=0.0.9
+torch>=2.0.0
+torchaudio>=2.0.0,<2.9   # AudioMetaData removed in 2.9, whisperx deps still need it
+# Install whisperx from GitHub:
+# pip install git+https://github.com/m-bain/whisperx.git
+whisperx>=3.1.0
+pydantic>=2.0.0
+ffmpeg-python>=0.2.0

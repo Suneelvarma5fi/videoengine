@@ -1,0 +1,24 @@
+{
+  "name": "kinetic_single_word_v1",
+  "position": "center",
+  "alignment": "center",
+  "max_lines": 1,
+  "font_family": "Inter",
+  "font_size": 120,
+  "base_color": "#FFFFFF",
+  "background_color": "transparent",
+  "highlight_color": "#FFD700",
+  "highlight_style": "scale",
+  "highlight": {
+    "mode": "scale",
+    "transition_in_ms": 50,
+    "transition_out_ms": 50
+  },
+  "block_config": {
+    "min_words_per_block": 1,
+    "max_words_per_block": 1,
+    "max_duration_per_block": 2.0,
+    "split_on_punctuation": false,
+    "pause_threshold": 0.3
+  }
+}

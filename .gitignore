@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+
+# Runtime directories (generated at runtime)
+jobs/
+uploads/
+presets/
+
+# macOS
+.DS_Store

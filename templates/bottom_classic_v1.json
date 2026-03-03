@@ -1,0 +1,24 @@
+{
+  "name": "bottom_classic_v1",
+  "position": "bottom",
+  "alignment": "center",
+  "max_lines": 2,
+  "font_family": "Inter",
+  "font_size": 48,
+  "base_color": "#FFFFFF",
+  "background_color": "transparent",
+  "highlight_color": "#FFFFFF",
+  "highlight_style": "bold",
+  "highlight": {
+    "mode": "bold",
+    "transition_in_ms": 60,
+    "transition_out_ms": 60
+  },
+  "block_config": {
+    "min_words_per_block": 4,
+    "max_words_per_block": 10,
+    "max_duration_per_block": 5.0,
+    "split_on_punctuation": true,
+    "pause_threshold": 0.6
+  }
+}
