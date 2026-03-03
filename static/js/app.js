@@ -194,13 +194,19 @@ syncColor("pick-highlight-color", "txt-highlight-color");
 
 // ── Render ───────────────────────────────────────────────
 document.getElementById("btn-render").addEventListener("click", async () => {
-  const template = document.getElementById("sel-template").value;
-  const maxWords = parseInt(document.getElementById("rng-max-words").value);
-  const pause    = parseFloat(document.getElementById("rng-pause").value) / 10;
-  const maxDur   = parseFloat(document.getElementById("rng-max-dur").value) / 10;
+  const template  = document.getElementById("sel-template").value;
+  const preset    = document.getElementById("sel-preset").value;
+  const baseColor = document.getElementById("txt-base-color").value;
+  const hiColor   = document.getElementById("txt-highlight-color").value;
+  const maxWords  = parseInt(document.getElementById("rng-max-words").value);
+  const pause     = parseFloat(document.getElementById("rng-pause").value) / 10;
+  const maxDur    = parseFloat(document.getElementById("rng-max-dur").value) / 10;
 
   const body = {
     template_name: template,
+    preset,
+    base_color:      /^#[0-9a-fA-F]{6}$/.test(baseColor) ? baseColor : null,
+    highlight_color: /^#[0-9a-fA-F]{6}$/.test(hiColor)   ? hiColor   : null,
     block_config_override: {
       max_words_per_block: maxWords,
       pause_threshold: pause,

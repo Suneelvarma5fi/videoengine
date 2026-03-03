@@ -21,6 +21,7 @@ from core.audio_extractor import extract_audio
 from core.transcriber import Transcriber
 from core.ass_exporter import export_ass
 from core.video_renderer import burn_subtitles, check_libass
+from renderers.ass_v2 import export_ass_v2, PRESET_NAMES
 from subtitle_engine.engine import process as subtitle_process
 from subtitle_engine.models import InputWord
 from transcriber_models.config import ExtractorConfig
@@ -91,6 +92,9 @@ def _run_render(
     block_config_override: Optional[Dict[str, Any]],
     video_width: int,
     video_height: int,
+    preset: str = "word_pop",
+    base_color: Optional[str] = None,
+    highlight_color: Optional[str] = None,
 ) -> None:
     status = _read_status(job_id)
     try:
@@ -120,7 +124,15 @@ def _run_render(
         )
 
         ass_path = job_dir / "subtitles.ass"
-        export_ass(layout, ass_path, video_width=video_width, video_height=video_height)
+        export_ass_v2(
+            layout,
+            ass_path,
+            preset=preset,
+            video_width=video_width,
+            video_height=video_height,
+            base_color=base_color,
+            highlight_color=highlight_color,
+        )
 
         status["status"] = "rendering"
         _write_status(job_dir, status)
@@ -174,6 +186,11 @@ def get_transcript(job_id: str):
     return json.loads(transcript_path.read_text())
 
 
+@router.get("/animation-presets")
+def list_animation_presets():
+    return {"presets": list(PRESET_NAMES)}
+
+
 @router.get("/templates")
 def list_templates():
     if not TEMPLATES_DIR.exists():
@@ -187,6 +204,9 @@ class RenderRequest(BaseModel):
     block_config_override: Optional[Dict[str, Any]] = None
     video_width: int = 1080
     video_height: int = 1920
+    preset: str = "word_pop"
+    base_color: Optional[str] = None        # #RRGGBB override; None = use template default
+    highlight_color: Optional[str] = None   # #RRGGBB override; None = use template default
 
 
 @router.post("/jobs/{job_id}/render")
@@ -219,6 +239,9 @@ def render_job(job_id: str, req: RenderRequest, background_tasks: BackgroundTask
         req.block_config_override,
         req.video_width,
         req.video_height,
+        req.preset,
+        req.base_color,
+        req.highlight_color,
     )
     status["status"] = "rendering_queued"
     _write_status(job_dir, status)
